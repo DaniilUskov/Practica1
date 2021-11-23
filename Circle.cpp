@@ -3,15 +3,15 @@
 
 #define MAX_LOADSTRING 100
 
-// Global Variables:
-HINSTANCE hInst;                                // Current instance
-WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
-WCHAR szWindowClass[MAX_LOADSTRING];            // The main window class name
-HBITMAP hBitmap;                                // Circle bmp
+//Глобальные переменные:
+HINSTANCE hInst;                                // Текущий экземпляр
+WCHAR szTitle[MAX_LOADSTRING];                  // Текст строки заголовка
+WCHAR szWindowClass[MAX_LOADSTRING];            // Имя класса главного окна
+HBITMAP hBitmap;                                // Круг bmp
 int xTop, yTop, xBottom, yBottom;
 int r, d;
 
-// Forward declarations of functions included in this code module:
+// Прямые объявления функций, включенных в этот модуль кода :
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -25,7 +25,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-    // Initialize image
+    // Инициализируем изображение
     hBitmap = (HBITMAP)LoadImage(hInstance, L"circle.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 
     BITMAP bm; 
@@ -87,12 +87,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     xBottom += r;
     delete[] pixels;
 
-    // Initialize global strings
+    // Инициализируем глобальные строки
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_CIRCLE, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
 
-    // Perform application initialization:
+    
     if (!InitInstance (hInstance, nCmdShow))
     {
         return FALSE;
@@ -102,7 +102,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
-    // Main message loop:
+    // Основной цикл сообщений:
     while (GetMessage(&msg, nullptr, 0, 0))
     {
         if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
@@ -118,9 +118,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 
 //
-//  FUNCTION: MyRegisterClass()
+//  ФУНКЦИЯ: MyRegisterClass ()
 //
-//  PURPOSE: Registers the window class.
+//  НАЗНАЧЕНИЕ: Регистрирует класс окна.
 //
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
@@ -144,18 +144,18 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 }
 
 //
-//   FUNCTION: InitInstance(HINSTANCE, int)
+//   ФУНКЦИЯ: InitInstance (HINSTANCE, int)
 //
-//   PURPOSE: Saves instance handle and creates main window
+//   НАЗНАЧЕНИЕ: Сохраняет дескриптор экземпляра и создает главное окно
 //
-//   COMMENTS:
+//   Комментарии:
 //
-//        In this function, we save the instance handle in a global variable and
-//        create and display the main program window.
+//        В этой функции мы сохраняем дескриптор экземпляра в глобальной переменной и
+//      создать и отобразить главное окно программы.
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-   hInst = hInstance; // Store instance handle in our global variable
+   hInst = hInstance; // Помещаем дескриптор экземпляра в нашу глобальную переменную
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
@@ -172,13 +172,13 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 }
 
 //
-//  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
+//  ФУНКЦИЯ: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
-//  PURPOSE: Processes messages for the main window.
+//  НАЗНАЧЕНИЕ: Обрабатывает сообщения для главного окна
 //
-//  WM_COMMAND  - process the application menu
-//  WM_PAINT    - Paint the main window
-//  WM_DESTROY  - post a quit message and return
+//  WM_COMMAND - обработать меню приложения
+//  WM_PAINT - Раскрашиваем главное окно
+//  WM_DESTROY - отправить сообщение о выходе и вернуться
 //
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -188,7 +188,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
-            // Parse the menu selections:
+            //  Разберите пункты меню :
             switch (wmId)
             {
             case IDM_ABOUT:
@@ -229,7 +229,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     return 0;
 }
 
-// Message handler for about box.
+// Обработчик сообщений для окна About
 INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
     UNREFERENCED_PARAMETER(lParam);
